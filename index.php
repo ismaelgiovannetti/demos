@@ -36,6 +36,30 @@ try {
 
 
 
+<style>
+    .vote-button {
+        background: none;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        cursor: pointer;
+        padding: 2px 8px;
+        transition: all 0.2s;
+    }
+    .vote-button:hover {
+        background: #f0f0f0;
+    }
+    .vote-button[data-vote-type="up"].active {
+        background: #4CAF50;
+        color: white;
+        border-color: #4CAF50;
+    }
+    .vote-button[data-vote-type="down"].active {
+        background: #f44336;
+        color: white;
+        border-color: #f44336;
+    }
+</style>
+
 <script>
 function handleVote(postId, voteType, button) {
     // Disable the button to prevent multiple clicks
@@ -127,7 +151,6 @@ if (!new URLSearchParams(window.location.search).has('date')) {
                         data-post-id="<?php echo $post['id']; ?>" 
                         data-vote-type="up"
                         onclick="return handleVote(<?php echo $post['id']; ?>, 'up', this)"
-                        style="background: none; border: 1px solid #ccc; border-radius: 3px; cursor: pointer; padding: 2px 8px;"
                     >
                         ▲
                     </button>
@@ -136,7 +159,6 @@ if (!new URLSearchParams(window.location.search).has('date')) {
                         data-post-id="<?php echo $post['id']; ?>" 
                         data-vote-type="down"
                         onclick="return handleVote(<?php echo $post['id']; ?>, 'down', this)"
-                        style="background: none; border: 1px solid #ccc; border-radius: 3px; cursor: pointer; padding: 2px 8px;"
                     >
                         ▼
                     </button>
