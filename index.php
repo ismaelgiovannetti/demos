@@ -66,24 +66,31 @@ function handleVote(postId, voteType, button) {
     const upButton = document.querySelector(`button[data-post-id="${postId}"][data-vote-type="up"]`);
     const downButton = document.querySelector(`button[data-post-id="${postId}"][data-vote-type="down"]`);
     
-    // Immediately update UI to show the new vote state
+    // Determine the new vote state
+    let newVoteType = null;
+    let isRemovingVote = false;
+    
     if (voteType === 'up') {
         if (upButton.classList.contains('active')) {
             // If upvote is already active, remove the vote
             upButton.classList.remove('active');
+            isRemovingVote = true;
         } else {
             // Otherwise, set upvote and remove downvote
             upButton.classList.add('active');
             downButton.classList.remove('active');
+            newVoteType = 'up';
         }
     } else {
         if (downButton.classList.contains('active')) {
             // If downvote is already active, remove the vote
             downButton.classList.remove('active');
+            isRemovingVote = true;
         } else {
             // Otherwise, set downvote and remove upvote
             downButton.classList.add('active');
             upButton.classList.remove('active');
+            newVoteType = 'down';
         }
     }
     
@@ -98,7 +105,7 @@ function handleVote(postId, voteType, button) {
     // Prepare the form data
     const formData = new FormData();
     formData.append('post_id', postId);
-    formData.append('vote_type', button.classList.contains('active') ? voteType : 'remove');
+    formData.append('vote_type', isRemovingVote ? 'remove' : newVoteType);
     
     // Send the AJAX request
     fetch('vote.php', {
