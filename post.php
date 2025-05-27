@@ -3,7 +3,7 @@ try {
     require_once 'includes/config.php';
     
     if (!is_logged_in()) {
-        $_SESSION['message'] = 'Who are you ? Connect to the People to Talk.';
+        $_SESSION['message'] = 'Dèmos : Who are you ? Connect to the People to Talk.';
         redirect('login.php');
         exit();
     }
@@ -12,13 +12,13 @@ try {
         $content = isset($_POST['content']) ? trim($_POST['content']) : '';
         
         if (empty($content)) {
-            $_SESSION['message'] = 'Post content cannot be empty';
+            $_SESSION['message'] = 'Dèmos : So silent...';
             redirect('post.php');
             exit();
         }
         
         if (strlen($content) > 280) {
-            $_SESSION['message'] = 'Post must be 280 characters or less';
+            $_SESSION['message'] = 'Dèmos : Talk less...';
             redirect('post.php');
             exit();
         }
@@ -31,7 +31,7 @@ try {
             
             $db->commit();
             
-            $_SESSION['message'] = 'Post created successfully!';
+            $_SESSION['message'] = 'Dèmos : The People are listening...';
             redirect('index.php');
             exit();
         } catch (PDOException $e) {
@@ -39,14 +39,14 @@ try {
                 $db->rollBack();
             }
             error_log('Post creation error: ' . $e->getMessage());
-            $_SESSION['message'] = 'Failed to create post. Error: ' . $e->getMessage();
+            $_SESSION['message'] = 'Dèmos : Mhh...';
             redirect('post.php');
             exit();
         }
     }
 } catch (Exception $e) {
     error_log('Unexpected error in post.php: ' . $e->getMessage());
-    $_SESSION['message'] = 'An unexpected error occurred. Please try again.';
+    $_SESSION['message'] = 'Dèmos : Mhh...';
     if (!headers_sent()) {
         header('Location: index.php');
     }
@@ -55,28 +55,20 @@ try {
 ?>
 <?php include 'includes/header.php'; ?>
 
-<h1>Create a New Post</h1>
-
-<?php if (isset($_SESSION['message'])): ?>
-    <div>
-        <?php 
-        echo htmlspecialchars($_SESSION['message']); 
-        unset($_SESSION['message']);
-        ?>
-    </div>
-<?php endif; ?>
-
-<form method="post" action="post.php">
-    <div>
-        <textarea name="content" rows="5" cols="50" maxlength="280" required><?php 
-            echo htmlspecialchars($_POST['content'] ?? ''); 
-        ?></textarea>
-        <div>Max 280 characters</div>
-    </div>
-    <div>
-        <input type="submit" value="Post">
-        <a href="index.php">Cancel</a>
-    </div>
-</form>
+<div style="max-width: 600px; margin: 0 auto; padding: 20px; text-align: center;">
+    <h1>Talk to the People</h1>
+    
+    <form method="post" action="post.php" style="margin: 20px 0;">
+        <div style="margin-bottom: 15px;">
+            <textarea name="content" rows="6" style="width: 100%; max-width: 100%; padding: 10px; box-sizing: border-box;" maxlength="280" required><?php 
+                echo htmlspecialchars($_POST['content'] ?? ''); 
+            ?></textarea>
+            <div style="text-align: right; color: #666; font-size: 0.9em; margin-top: 5px;">Maximum 280 characters</div>
+        </div>
+        <div>
+            <input type="submit" value="Talk" style="padding: 8px 20px; cursor: pointer;">
+        </div>
+    </form>
+</div>
 
 <?php include 'includes/footer.php'; ?>

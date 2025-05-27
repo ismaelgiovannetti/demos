@@ -97,7 +97,7 @@ function handleVote(postId, voteType, button) {
 </script>
 
 <div style="text-align: center; margin-bottom: 20px;">
-    <h1>Dèmos : The people</h1>
+    <h1>Dèmos : The People</h1>
     <form id="dateForm" style="margin: 20px 0;">
         <input type="date" id="datePicker" name="date" value="<?php echo htmlspecialchars($selectedDate); ?>">
     </form>

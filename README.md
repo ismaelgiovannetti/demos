@@ -1,2 +1,2 @@
 # demos
-Dèmos : The people
+Dèmos : The People
