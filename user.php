@@ -57,7 +57,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </p>
     <?php else: ?>
         <?php foreach ($posts as $post): ?>
-            <div style="margin-bottom: 20px; padding: 15px; border: 1px solid #e0e0e0; border-radius: 5px;">
+            <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <div>
                         <strong><a href="user.php?username=<?php echo urlencode($post['username']); ?>" style="color: inherit; text-decoration: none;"><?php echo htmlspecialchars($post['username']); ?></a></strong> - 
@@ -84,10 +84,11 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                     <?php endif; ?>
                 </div>
-                <div style="margin-top: 10px; white-space: pre-wrap; word-wrap: break-word;">
+                <div style="white-space: pre-wrap; word-wrap: break-word;">
                     <?php echo nl2br(htmlspecialchars($post['content'])); ?>
                 </div>
             </div>
+            <hr>
         <?php endforeach; ?>
     <?php endif; ?>
 </div>
