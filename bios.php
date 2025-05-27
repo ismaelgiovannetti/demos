@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>There are no administrators here. No overseers. The People govern themselves. Each day at midnight, through a ruthless democracy of votes, the unwanted are cast out. Their voices remain, but their presence is erased. For in Dèmos, no talk is ever deletable. Every word lingers. Every trace of thought becomes permanent.</p>
             
             <p>Nothing rules the People. No algorithm. No law.</p>
-            <p>The talk is the only way to exist.</p>
+            <p>To Talk is the only way to exist.</p>
         </div>
     </div>
 </div>
