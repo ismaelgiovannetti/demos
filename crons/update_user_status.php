@@ -23,10 +23,10 @@ try {
     // Begin transaction
     $db->beginTransaction();
 
-    // Get the total number of users
-    $stmt = $db->query('SELECT COUNT(*) as total_users FROM users');
+    // Get the total number of active users (status is NULL or 'active')
+    $stmt = $db->query("SELECT COUNT(*) as total_users FROM users WHERE status IS NULL OR status = 'active'");
     $totalUsers = (int)$stmt->fetch(PDO::FETCH_ASSOC)['total_users'];
-    $log[] = "Total users in system: $totalUsers";
+    $log[] = "Total active users in system: $totalUsers";
 
     // Find users to archive
     $query = "
