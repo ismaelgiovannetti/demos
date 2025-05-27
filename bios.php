@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
     <div style="padding: 20px; margin-bottom: 20px;">
-        <div style="line-height: 1.6;">
+        <div style="line-height: 1.6; text-align: justify;">
             <h1 style="text-align: center;">Bios</h1>
             <p>Dèmos: The People is a social experiment born from the shadows of the dead internet theory. Its existence spreads only through whispers. The link is never shared openly. Those who join do so anonymously, leaving behind names, faces, and traces. To enter with a distinctive username is to break the unspoken law.</p>
             
