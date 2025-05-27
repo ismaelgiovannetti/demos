@@ -3,6 +3,8 @@
 <head>
     <title>Dèmos : The People</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ios-button-reset.css">
 </head>
 <body>
     <table style="border-collapse: collapse; width: 100%;">
