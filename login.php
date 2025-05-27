@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </tr>
         </table>
     </form>
-    <p>New here? <a href="register.php">Join the People</a></p>
+    <p>Mhh... New face. <a href="register.php">Join the People</a></p>
 </div>
 
 <?php include 'includes/footer.php'; ?>
