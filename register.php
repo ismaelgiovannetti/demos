@@ -43,11 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <table style="margin: 0 auto; text-align: left;">
             <tr>
                 <td style="padding: 5px;">Username:</td>
-                <td style="padding: 5px;"><input type="text" name="username" required style="width: 100%;"></td>
+                <td style="padding: 5px;"><input type="text" name="username" style="width: 100%;"></td>
             </tr>
             <tr>
                 <td style="padding: 5px;">Password:</td>
-                <td style="padding: 5px;"><input type="password" name="password" required style="width: 100%;"></td>
+                <td style="padding: 5px;"><input type="password" name="password" style="width: 100%;"></td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center; padding-top: 15px;">
