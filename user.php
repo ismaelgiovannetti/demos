@@ -60,7 +60,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <div>
                     <strong><a href="user.php?username=<?php echo urlencode($post['username']); ?>" style="color: inherit; text-decoration: none;"><?php echo htmlspecialchars($post['username']); ?></a></strong> - 
-                    <?php echo date('g:i a', strtotime($post['created_at'])); ?>
+                    <?php echo date('M j, Y g:i a', strtotime($post['created_at'])); ?>
                 </div>
                 <?php if (is_logged_in()): ?>
                 <div style="display: flex; gap: 10px;">
