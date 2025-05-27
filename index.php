@@ -157,6 +157,8 @@ function handleVote(postId, voteType, button) {
     </form>
 </div>
 
+<div style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
+
 <script>
 // Auto-submit form when date changes
 document.getElementById('datePicker').addEventListener('change', function() {
@@ -206,5 +208,7 @@ if (!new URLSearchParams(window.location.search).has('date')) {
         </div>
     <?php endforeach; ?>
 <?php endif; ?>
+
+</div>
 
 <?php include 'includes/footer.php'; ?>
