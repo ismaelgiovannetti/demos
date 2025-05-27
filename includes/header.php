@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Social Network</title>
+    <title>Dèmos : The people</title>
     <meta charset="UTF-8">
 </head>
 <body>
-    <table width="100%" border="1">
+    <table width="100%">
         <tr>
             <td><a href="index.php">Home</a></td>
             <?php if (is_logged_in()): ?>
