@@ -1,3 +1,17 @@
+<?php
+try {
+    require_once 'includes/config.php';
+    require_once 'includes/functions.php';
+    
+    // Start the session if not already started
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+} catch (Exception $e) {
+    // Handle any errors during initialization
+    die('An error occurred while initializing the page.');
+}
+?>
 <?php include 'includes/header.php'; ?>
 
 <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
