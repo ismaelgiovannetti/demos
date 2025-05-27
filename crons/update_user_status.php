@@ -33,7 +33,7 @@ try {
         SELECT id, username, social_credit 
         FROM users 
         WHERE social_credit < 0 
-        AND ABS(social_credit) > :total_users
+        AND social_credit < -:total_users
         AND (status IS NULL OR status != 'archived')
     ";
     
