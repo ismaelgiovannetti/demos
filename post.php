@@ -60,7 +60,7 @@ try {
     
     <form method="post" action="post.php" style="margin: 20px 0;">
         <div style="margin-bottom: 15px;">
-            <textarea name="content" rows="6" style="width: 100%; max-width: 100%; padding: 10px; box-sizing: border-box;" maxlength="280" required><?php 
+            <textarea name="content" rows="6" style="width: 100%; max-width: 100%; padding: 10px; box-sizing: border-box;" maxlength="280"><?php 
                 echo htmlspecialchars($_POST['content'] ?? ''); 
             ?></textarea>
             <div style="text-align: right; font-size: 0.9em; margin-top: 5px;">Maximum 280 characters</div>
