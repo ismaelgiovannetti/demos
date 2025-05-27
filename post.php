@@ -7,6 +7,17 @@ try {
         redirect('login.php');
         exit();
     }
+    
+    // Check if user is archived
+    $stmt = $db->prepare('SELECT status FROM users WHERE id = ?');
+    $stmt->execute([get_current_user_id()]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($user && isset($user['status']) && $user['status'] === 'archived') {
+        $_SESSION['message'] = 'Dèmos : The People have judged you...';
+        redirect('index.php');
+        exit();
+    }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $content = isset($_POST['content']) ? trim($_POST['content']) : '';

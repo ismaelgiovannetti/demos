@@ -44,6 +44,9 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <p><strong>Your Stats:</strong></p>
                 <p>Social Credit: <?php echo (int)$user['social_credit']; ?></p>
                 <p>Total Posts: <?php echo count($posts); ?></p>
+                <?php if (isset($user['status']) && $user['status'] === 'archived'): ?>
+                    <p style="color: red; font-weight: bold;">Dèmos : The People have judged you...</p>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
     </div>
@@ -63,24 +66,33 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php echo date('M j, Y g:i a', strtotime($post['created_at'])); ?>
                 </div>
                 <?php if (is_logged_in()): ?>
-                <div style="display: flex; gap: 10px;">
-                    <button 
-                        class="vote-button <?php echo ($post['user_vote'] ?? '') === 'up' ? 'active' : ''; ?>" 
-                        data-post-id="<?php echo $post['id']; ?>" 
-                        data-vote-type="up"
-                        onclick="return handleVote(<?php echo $post['id']; ?>, 'up', this)"
-                    >
-                        ▲
-                    </button>
-                    <button 
-                        class="vote-button <?php echo ($post['user_vote'] ?? '') === 'down' ? 'active' : ''; ?>" 
-                        data-post-id="<?php echo $post['id']; ?>" 
-                        data-vote-type="down"
-                        onclick="return handleVote(<?php echo $post['id']; ?>, 'down', this)"
-                    >
-                        ▼
-                    </button>
-                </div>
+                    <?php
+                    // Check if current user is archived
+                    $stmt = $db->prepare('SELECT status FROM users WHERE id = ?');
+                    $stmt->execute([get_current_user_id()]);
+                    $currentUser = $stmt->fetch(PDO::FETCH_ASSOC);
+                    
+                    if (!($currentUser && isset($currentUser['status']) && $currentUser['status'] === 'archived')): 
+                    ?>
+                    <div style="display: flex; gap: 10px;">
+                        <button 
+                            class="vote-button <?php echo ($post['user_vote'] ?? '') === 'up' ? 'active' : ''; ?>" 
+                            data-post-id="<?php echo $post['id']; ?>" 
+                            data-vote-type="up"
+                            onclick="return handleVote(<?php echo $post['id']; ?>, 'up', this)"
+                        >
+                            ▲
+                        </button>
+                        <button 
+                            class="vote-button <?php echo ($post['user_vote'] ?? '') === 'down' ? 'active' : ''; ?>" 
+                            data-post-id="<?php echo $post['id']; ?>" 
+                            data-vote-type="down"
+                            onclick="return handleVote(<?php echo $post['id']; ?>, 'down', this)"
+                        >
+                            ▼
+                        </button>
+                    </div>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
             <p style="margin: 10px 0 20px 0; font-size: 1.1em;"><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>

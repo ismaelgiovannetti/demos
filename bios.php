@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            $_SESSION['message'] = 'Dèmos : Welcome back, ' . htmlspecialchars($user['username']) . '!';
+            $_SESSION['message'] = 'Dèmos : Welcome back, ' . htmlspecialchars($user['username']) . '...';
             redirect('index.php');
         } else {
             // Log failed login attempt
