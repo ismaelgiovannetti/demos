@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include 'includes/header.php'; ?>
 
 <div style="max-width: 400px; margin: 0 auto; padding: 20px; text-align: center;">
-    <h1>Connect to the People</h1>
+    <h1>Connect to The People</h1>
     <form method="post" action="login.php" style="margin: 20px 0;">
         <table style="margin: 0 auto; text-align: left;">
             <tr>
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </tr>
         </table>
     </form>
-    <p>Mhh... New face. <a href="register.php">Join the People</a></p>
+    <p>Mhh... New face. <a href="register.php">Join The People</a></p>
 </div>
 
 <?php include 'includes/footer.php'; ?>

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $db->prepare('INSERT INTO users (username, password) VALUES (?, ?)');
         $stmt->execute([$username, $hashedPassword]);
         
-        $_SESSION['message'] = 'Dèmos : Welcome to the People. Now connect.';
+        $_SESSION['message'] = 'Dèmos : Welcome to The People. Now connect.';
         redirect('login.php');
     } catch (PDOException $e) {
         if ($e->getCode() == 23000) { // Duplicate entry
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include 'includes/header.php'; ?>
 
 <div style="max-width: 400px; margin: 0 auto; padding: 20px; text-align: center;">
-    <h1>Join the People</h1>
+    <h1>Join The People</h1>
     <form method="post" action="register.php" style="margin: 20px 0;">
         <table style="margin: 0 auto; text-align: left;">
             <tr>
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </tr>
         </table>
     </form>
-    <p>I know you... <a href="login.php">Connect to the People</a></p>
+    <p>I know you... <a href="login.php">Connect to The People</a></p>
 </div>
 
 <?php include 'includes/footer.php'; ?>

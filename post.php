@@ -3,7 +3,7 @@ try {
     require_once 'includes/config.php';
     
     if (!is_logged_in()) {
-        $_SESSION['message'] = 'Dèmos : Who are you ? Connect to the People to Talk.';
+        $_SESSION['message'] = 'Dèmos : Who are you ? Connect to The People to Talk.';
         redirect('login.php');
         exit();
     }
@@ -56,7 +56,7 @@ try {
 <?php include 'includes/header.php'; ?>
 
 <div style="max-width: 600px; margin: 0 auto; padding: 20px; text-align: center;">
-    <h1>Talk to the People</h1>
+    <h1>Talk to The People</h1>
     
     <form method="post" action="post.php" style="margin: 20px 0;">
         <div style="margin-bottom: 15px;">
