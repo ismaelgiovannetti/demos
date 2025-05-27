@@ -177,8 +177,8 @@ if (!new URLSearchParams(window.location.search).has('date')) {
         <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <div>
-                    <strong><?php echo htmlspecialchars($post['username']); ?></strong> - 
-                    <?php echo date('M j, Y g:i a', strtotime($post['created_at'])); ?>
+                    <strong><a href="user.php?username=<?php echo urlencode($post['username']); ?>" style="color: inherit; text-decoration: none;"><?php echo htmlspecialchars($post['username']); ?></a></strong> - 
+                    <?php echo date('g:i a', strtotime($post['created_at'])); ?>
                 </div>
                 <?php if (is_logged_in()): ?>
                 <div style="display: flex; gap: 10px;">
