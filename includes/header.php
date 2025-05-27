@@ -7,14 +7,39 @@
 <body>
     <table style="border-collapse: collapse; width: 100%;">
         <tr>
-            <td style="width: 25%; text-align: center; padding: 10px;"><a href="index.php">The People</a></td>
+            <td style="width: 25%; text-align: center; padding: 10px;">
+                <form action="index.php" method="get" style="display: inline;">
+                    <button type="submit" style="padding: 8px 16px; cursor: pointer;">The People</button>
+                </form>
+            </td>
             <?php if (is_logged_in()): ?>
-                <td style="width: 25%; text-align: center; padding: 10px;"><a style="text-decoration: none; color: black; background-color:rgb(230, 230, 230);" href="post.php">Talk</a></td>
-                <td style="width: 25%; text-align: center; padding: 10px;"><a style="text-decoration: none; color: black; background-color:rgb(230, 230, 230);" href="user.php?username=<?php echo htmlspecialchars($_SESSION['username']); ?>"><?php echo htmlspecialchars($_SESSION['username']); ?></a></td>
-                <td style="width: 25%; text-align: center; padding: 10px;"><a style="text-decoration: none; color: black; background-color:rgb(230, 230, 230);" href="logout.php">Disconnect</a></td>
+                <td style="width: 25%; text-align: center; padding: 10px;">
+                    <form action="post.php" method="get" style="display: inline;">
+                        <button type="submit" style="padding: 8px 16px; cursor: pointer;">Talk</button>
+                    </form>
+                </td>
+                <td style="width: 25%; text-align: center; padding: 10px;">
+                    <form action="user.php" method="get" style="display: inline;">
+                        <input type="hidden" name="username" value="<?php echo htmlspecialchars($_SESSION['username']); ?>">
+                        <button type="submit" style="padding: 8px 16px; cursor: pointer;"><?php echo htmlspecialchars($_SESSION['username']); ?></button>
+                    </form>
+                </td>
+                <td style="width: 25%; text-align: center; padding: 10px;">
+                    <form action="logout.php" method="post" style="display: inline;">
+                        <button type="submit" style="padding: 8px 16px; cursor: pointer;">Disconnect</button>
+                    </form>
+                </td>
             <?php else: ?>
-                <td style="width: 50%; text-align: center; padding: 10px;" colspan="2"><a href="login.php">Connect</a></td>
-                <td style="width: 50%; text-align: center; padding: 10px;" colspan="2"><a href="register.php">Join</a></td>
+                <td style="width: 50%; text-align: center; padding: 10px;" colspan="2">
+                    <form action="login.php" method="get" style="display: inline;">
+                        <button type="submit" style="padding: 8px 16px; cursor: pointer;">Connect</button>
+                    </form>
+                </td>
+                <td style="width: 50%; text-align: center; padding: 10px;" colspan="2">
+                    <form action="register.php" method="get" style="display: inline;">
+                        <button type="submit" style="padding: 8px 16px; cursor: pointer;">Join</button>
+                    </form>
+                </td>
             <?php endif; ?>
         </tr>
     </table>
