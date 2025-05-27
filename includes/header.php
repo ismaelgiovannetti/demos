@@ -45,6 +45,8 @@
     </table>
     <hr>
     <?php if (isset($_SESSION['message'])): ?>
-        <p><?php echo htmlspecialchars($_SESSION['message']); ?></p>
+        <div style="text-align: center; color: red; margin: 10px 0; font-weight: bold;">
+            <?php echo htmlspecialchars($_SESSION['message']); ?>
+        </div>
         <?php unset($_SESSION['message']); ?>
     <?php endif; ?>
