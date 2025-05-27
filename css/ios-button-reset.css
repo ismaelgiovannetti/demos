@@ -1,29 +1,50 @@
-/* Reset button styles for iOS */
+/* Reset iOS-specific styles while maintaining default button appearance */
 button, 
-button[type="submit"] {
+button[type="submit"],
+input[type="button"],
+input[type="submit"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: none;
-    border: none;
-    border-radius: 0;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 12px;
     font: inherit;
-    color: inherit;
+    color: #333;
     cursor: pointer;
-    padding: 0;
-    margin: 0;
-    outline: none;
+    margin: 2px;
     -webkit-tap-highlight-color: transparent;
+}
+
+button:hover,
+button[type="submit"]:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+    background-color: #e0e0e0;
+}
+
+/* Style for date input */
+input[type="date"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px;
+    font: inherit;
 }
 
 /* Remove iOS input shadow */
 input[type="text"],
 input[type="email"],
 input[type="password"],
-input[type="date"],
 textarea {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border-radius: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px;
 }
