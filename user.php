@@ -66,24 +66,33 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php echo date('M j, Y g:i a', strtotime($post['created_at'])); ?>
                 </div>
                 <?php if (is_logged_in()): ?>
-                <div style="display: flex; gap: 10px;">
-                    <button 
-                        class="vote-button <?php echo ($post['user_vote'] ?? '') === 'up' ? 'active' : ''; ?>" 
-                        data-post-id="<?php echo $post['id']; ?>" 
-                        data-vote-type="up"
-                        onclick="return handleVote(<?php echo $post['id']; ?>, 'up', this)"
-                    >
-                        ▲
-                    </button>
-                    <button 
-                        class="vote-button <?php echo ($post['user_vote'] ?? '') === 'down' ? 'active' : ''; ?>" 
-                        data-post-id="<?php echo $post['id']; ?>" 
-                        data-vote-type="down"
-                        onclick="return handleVote(<?php echo $post['id']; ?>, 'down', this)"
-                    >
-                        ▼
-                    </button>
-                </div>
+                    <?php
+                    // Check if current user is archived
+                    $stmt = $db->prepare('SELECT status FROM users WHERE id = ?');
+                    $stmt->execute([get_current_user_id()]);
+                    $currentUser = $stmt->fetch(PDO::FETCH_ASSOC);
+                    
+                    if (!($currentUser && isset($currentUser['status']) && $currentUser['status'] === 'archived')): 
+                    ?>
+                    <div style="display: flex; gap: 10px;">
+                        <button 
+                            class="vote-button <?php echo ($post['user_vote'] ?? '') === 'up' ? 'active' : ''; ?>" 
+                            data-post-id="<?php echo $post['id']; ?>" 
+                            data-vote-type="up"
+                            onclick="return handleVote(<?php echo $post['id']; ?>, 'up', this)"
+                        >
+                            ▲
+                        </button>
+                        <button 
+                            class="vote-button <?php echo ($post['user_vote'] ?? '') === 'down' ? 'active' : ''; ?>" 
+                            data-post-id="<?php echo $post['id']; ?>" 
+                            data-vote-type="down"
+                            onclick="return handleVote(<?php echo $post['id']; ?>, 'down', this)"
+                        >
+                            ▼
+                        </button>
+                    </div>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
             <p style="margin: 10px 0 20px 0; font-size: 1.1em;"><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
