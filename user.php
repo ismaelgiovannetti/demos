@@ -49,43 +49,44 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
 <?php if (empty($posts)): ?>
-<p style="text-align: center; color: red; margin: 10px 0; font-weight: bold;">
-    Dèmos : So silent...
+    <p style="text-align: center; color: red; margin: 10px 0; font-weight: bold;">Dèmos : So silent... 
     <?php if (is_logged_in() && get_current_user_id() == $user['id']): ?>
-    <a href="post.php">Talk.</a>
+        <a href="post.php">Talk.</a>
     <?php endif; ?>
-</p>
+    </p>
 <?php else: ?>
-<?php foreach ($posts as $post): ?>
-<div>
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+    <?php foreach ($posts as $post): ?>
         <div>
-            <strong><a href="user.php?username=<?php echo urlencode($post['username']); ?>" style="color: inherit; text-decoration: none;"><?php echo htmlspecialchars($post['username']); ?></a></strong> - 
-            <?php echo date('g:i a', strtotime($post['created_at'])); ?>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <div>
+                    <strong><a href="user.php?username=<?php echo urlencode($post['username']); ?>" style="color: inherit; text-decoration: none;"><?php echo htmlspecialchars($post['username']); ?></a></strong> - 
+                    <?php echo date('g:i a', strtotime($post['created_at'])); ?>
+                </div>
+                <?php if (is_logged_in()): ?>
+                <div style="display: flex; gap: 10px;">
+                    <button 
+                        class="vote-button <?php echo ($post['user_vote'] ?? '') === 'up' ? 'active' : ''; ?>" 
+                        data-post-id="<?php echo $post['id']; ?>" 
+                        data-vote-type="up"
+                        onclick="return handleVote(<?php echo $post['id']; ?>, 'up', this)"
+                    >
+                        ▲
+                    </button>
+                    <button 
+                        class="vote-button <?php echo ($post['user_vote'] ?? '') === 'down' ? 'active' : ''; ?>" 
+                        data-post-id="<?php echo $post['id']; ?>" 
+                        data-vote-type="down"
+                        onclick="return handleVote(<?php echo $post['id']; ?>, 'down', this)"
+                    >
+                        ▼
+                    </button>
+                </div>
+                <?php endif; ?>
+            </div>
+            <p style="margin: 10px 0 20px 0; font-size: 1.1em;"><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
+            <hr>
         </div>
-        <?php if (is_logged_in()): ?>
-        <div style="display: flex; gap: 10px;">
-            <button 
-                class="vote-button <?php echo ($post['user_vote'] ?? '') === 'up' ? 'active' : ''; ?>" 
-                data-post-id="<?php echo $post['id']; ?>" 
-                data-vote-type="up"
-                onclick="return handleVote(<?php echo $post['id']; ?>, 'up', this)"
-            >▲</button>
-            <button 
-                class="vote-button <?php echo ($post['user_vote'] ?? '') === 'down' ? 'active' : ''; ?>" 
-                data-post-id="<?php echo $post['id']; ?>" 
-                data-vote-type="down"
-                onclick="return handleVote(<?php echo $post['id']; ?>, 'down', this)"
-            >▼</button>
-        </div>
-        <?php endif; ?>
-    </div>
-    <div style="white-space: pre-wrap; word-wrap: break-word;">
-        <?php echo nl2br(htmlspecialchars($post['content'])); ?>
-    </div>
-</div>
-<hr>
-<?php endforeach; ?>
+    <?php endforeach; ?>
 <?php endif; ?>
 </div>
 
