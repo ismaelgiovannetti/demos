@@ -3,7 +3,7 @@ try {
     require_once 'includes/config.php';
     
     if (!is_logged_in()) {
-        $_SESSION['message'] = 'Please login to create a post';
+        $_SESSION['message'] = 'Who are you ? Connect to the People to Talk.';
         redirect('login.php');
         exit();
     }
