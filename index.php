@@ -62,8 +62,33 @@ try {
 
 <script>
 function handleVote(postId, voteType, button) {
-    // Disable the button to prevent multiple clicks
-    const buttons = document.querySelectorAll(`button[data-post-id="${postId}"]`);
+    // Get all vote buttons for this post
+    const upButton = document.querySelector(`button[data-post-id="${postId}"][data-vote-type="up"]`);
+    const downButton = document.querySelector(`button[data-post-id="${postId}"][data-vote-type="down"]`);
+    
+    // Immediately update UI to show the new vote state
+    if (voteType === 'up') {
+        if (upButton.classList.contains('active')) {
+            // If upvote is already active, remove the vote
+            upButton.classList.remove('active');
+        } else {
+            // Otherwise, set upvote and remove downvote
+            upButton.classList.add('active');
+            downButton.classList.remove('active');
+        }
+    } else {
+        if (downButton.classList.contains('active')) {
+            // If downvote is already active, remove the vote
+            downButton.classList.remove('active');
+        } else {
+            // Otherwise, set downvote and remove upvote
+            downButton.classList.add('active');
+            upButton.classList.remove('active');
+        }
+    }
+    
+    // Disable the buttons during the request
+    const buttons = [upButton, downButton];
     buttons.forEach(btn => btn.disabled = true);
     
     // Show loading state
@@ -73,7 +98,7 @@ function handleVote(postId, voteType, button) {
     // Prepare the form data
     const formData = new FormData();
     formData.append('post_id', postId);
-    formData.append('vote_type', voteType);
+    formData.append('vote_type', button.classList.contains('active') ? voteType : 'remove');
     
     // Send the AJAX request
     fetch('vote.php', {
@@ -85,28 +110,25 @@ function handleVote(postId, voteType, button) {
     .then(data => {
         if (data.error) {
             alert('Error: ' + data.error);
-        } else {
-            // Toggle active class on buttons
-            const upButton = document.querySelector(`button[data-post-id="${postId}"][data-vote-type="up"]`);
-            const downButton = document.querySelector(`button[data-post-id="${postId}"][data-vote-type="down"]`);
-            
-            if (voteType === 'up') {
-                upButton.classList.toggle('active', data.user_vote === 'up');
-                downButton.classList.remove('active');
-            } else {
-                downButton.classList.toggle('active', data.user_vote === 'down');
-                upButton.classList.remove('active');
-            }
+            // Revert UI on error
+            upButton.classList.toggle('active', data.user_vote === 'up');
+            downButton.classList.toggle('active', data.user_vote === 'down');
         }
     })
     .catch(error => {
         console.error('Error:', error);
         alert('An error occurred while processing your vote.');
+        // Revert UI on error
+        upButton.classList.toggle('active', upButton.classList.contains('active') ? false : true);
+        downButton.classList.toggle('active', downButton.classList.contains('active') ? false : true);
     })
     .finally(() => {
         // Re-enable buttons and restore text
-        buttons.forEach(btn => btn.disabled = false);
-        button.textContent = originalText;
+        buttons.forEach(btn => {
+            btn.disabled = false;
+            if (btn.dataset.voteType === 'up') btn.textContent = '▲';
+            if (btn.dataset.voteType === 'down') btn.textContent = '▼';
+        });
     });
     
     // Prevent form submission
