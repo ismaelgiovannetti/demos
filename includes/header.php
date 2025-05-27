@@ -11,7 +11,7 @@
         <tr>
             <td style="width: 25%; text-align: center; padding: 10px;">
                 <form action="index.php" method="get" style="display: inline;">
-                    <button type="submit">The People</button>
+                    <button type="submit">People</button>
                 </form>
             </td>
             <?php if (is_logged_in()): ?>
