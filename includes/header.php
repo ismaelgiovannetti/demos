@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 </head>
 <body>
-    <table style="border-collapse: collapse;" width="100%">
+    <table style="border-collapse: collapse;" border="1" width="100%">
         <tr>
             <td><a href="index.php">Home</a></td>
             <?php if (is_logged_in()): ?>
