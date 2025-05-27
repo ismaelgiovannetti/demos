@@ -72,22 +72,22 @@ function handleVote(postId, voteType, button) {
     
     if (voteType === 'up') {
         if (upButton.classList.contains('active')) {
-            // If upvote is already active, remove the vote
+            // If upvote is already active, remove the vote by toggling it off
             upButton.classList.remove('active');
             isRemovingVote = true;
         } else {
-            // Otherwise, set upvote and remove downvote
+            // Set upvote and remove downvote
             upButton.classList.add('active');
             downButton.classList.remove('active');
             newVoteType = 'up';
         }
     } else {
         if (downButton.classList.contains('active')) {
-            // If downvote is already active, remove the vote
+            // If downvote is already active, remove the vote by toggling it off
             downButton.classList.remove('active');
             isRemovingVote = true;
         } else {
-            // Otherwise, set downvote and remove upvote
+            // Set downvote and remove upvote
             downButton.classList.add('active');
             upButton.classList.remove('active');
             newVoteType = 'down';
@@ -105,7 +105,14 @@ function handleVote(postId, voteType, button) {
     // Prepare the form data
     const formData = new FormData();
     formData.append('post_id', postId);
-    formData.append('vote_type', isRemovingVote ? 'remove' : newVoteType);
+    
+    // If removing a vote, we need to send the opposite of the current vote type
+    // because the server will toggle it off if it matches the existing vote
+    if (isRemovingVote) {
+        formData.append('vote_type', voteType); // Send the same type to toggle it off
+    } else {
+        formData.append('vote_type', newVoteType); // Send the new vote type
+    }
     
     // Send the AJAX request
     fetch('vote.php', {
