@@ -43,7 +43,6 @@
             <?php endif; ?>
         </tr>
     </table>
-    <br>
     <hr>
     <?php if (isset($_SESSION['message'])): ?>
         <p><?php echo htmlspecialchars($_SESSION['message']); ?></p>
