@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
     
-    if (empty($username) || empty($password)) {
+    if (empty($username)) {
         $_SESSION['message'] = 'Dèmos : What is your name ?';
         redirect('register.php');
     }
