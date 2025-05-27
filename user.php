@@ -40,7 +40,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>Dèmos : <?php echo htmlspecialchars($user['username']); ?></h1>
         
         <?php if (is_logged_in() && get_current_user_id() == $user['id']): ?>
-            <div style="margin: 10px 0; padding: 10px; background: #f5f5f5; border-radius: 5px;">
+            <div style="margin: 10px 0; padding: 10px; background: #f5f5f5;">
                 <p><strong>Your Stats:</strong></p>
                 <p>Social Credit: <?php echo (int)$user['social_credit']; ?></p>
                 <p>Total Posts: <?php echo count($posts); ?></p>
