@@ -7,6 +7,17 @@ if (!is_logged_in()) {
     exit();
 }
 
+// Check if user is archived
+$stmt = $db->prepare('SELECT status FROM users WHERE id = ?');
+$stmt->execute([get_current_user_id()]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($user && isset($user['status']) && $user['status'] === 'archived') {
+    http_response_code(403);
+    echo json_encode(['error' => 'Dèmos : The People have judged you...']);
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed']);

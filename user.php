@@ -44,6 +44,9 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <p><strong>Your Stats:</strong></p>
                 <p>Social Credit: <?php echo (int)$user['social_credit']; ?></p>
                 <p>Total Posts: <?php echo count($posts); ?></p>
+                <?php if (isset($user['status']) && $user['status'] === 'archived'): ?>
+                    <p style="color: red; font-weight: bold;">Dèmos : The People have judged you...</p>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
     </div>
