@@ -63,10 +63,10 @@ try {
             <textarea name="content" rows="6" style="width: 100%; max-width: 100%; padding: 10px; box-sizing: border-box;" maxlength="280" required><?php 
                 echo htmlspecialchars($_POST['content'] ?? ''); 
             ?></textarea>
-            <div style="text-align: right; color: #666; font-size: 0.9em; margin-top: 5px;">Maximum 280 characters</div>
+            <div style="text-align: right; font-size: 0.9em; margin-top: 5px;">Maximum 280 characters</div>
         </div>
         <div>
-            <input type="submit" value="Talk" style="padding: 8px 20px; cursor: pointer;">
+            <input type="submit" value="Talk">
         </div>
     </form>
 </div>
