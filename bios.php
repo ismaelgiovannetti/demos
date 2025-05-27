@@ -1,4 +1,4 @@
-
+<?php include 'includes/header.php'; ?>
 <p>
 Dèmos: The People is a social experiment born from the shadows of the dead internet theory. Its existence spreads only through whispers. The link is never shared openly. Those who join do so anonymously, leaving behind names, faces, and traces. To enter with a distinctive username is to break the unspoken law.
 
@@ -7,3 +7,4 @@ There are no administrators here. No overseers. The People govern themselves. Ea
 Nothing rules the People. No algorithm. No law.
 The talk is the only way to exist.
 <p>
+<?php include 'includes/footer.php'; ?>
