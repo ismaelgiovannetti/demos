@@ -44,3 +44,7 @@
         </tr>
     </table>
     <hr>
+    <?php if (isset($_SESSION['message'])): ?>
+        <p><?php echo htmlspecialchars($_SESSION['message']); ?></p>
+        <?php unset($_SESSION['message']); ?>
+    <?php endif; ?>
