@@ -1,15 +1,36 @@
 <?php
-try {
-    require_once 'includes/config.php';
-    require_once 'includes/functions.php';
+require_once 'includes/config.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
     
-    // Start the session if not already started
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
+    if (empty($username)) {
+        $_SESSION['message'] = 'Dèmos : What is your name ?';
+        redirect('login.php');
     }
-} catch (Exception $e) {
-    // Handle any errors during initialization
-    die('An error occurred while initializing the page.');
+    
+    try {
+        $stmt = $db->prepare('SELECT id, username, password FROM users WHERE username = ?');
+        $stmt->execute([$username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['message'] = 'Dèmos : Welcome back, ' . htmlspecialchars($user['username']) . '!';
+            redirect('index.php');
+        } else {
+            // Log failed login attempt
+            error_log("Failed login attempt for username: $username");
+            $_SESSION['message'] = 'Dèmos : I don\'t know you...';
+            redirect('login.php');
+        }
+    } catch (PDOException $e) {
+        error_log('Login error: ' . $e->getMessage());
+        $_SESSION['message'] = 'Dèmos : Mhh...';
+        redirect('login.php');
+    }
 }
 ?>
 <?php include 'includes/header.php'; ?>
