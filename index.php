@@ -117,7 +117,7 @@ if (!new URLSearchParams(window.location.search).has('date')) {
 </script>
 
 <?php if (empty($posts)): ?>
-    <p style="text-align: center; color: red; margin: 10px 0; font-weight: bold;">Dèmos : So silent... Talk.</p>
+    <p style="text-align: center; color: red; margin: 10px 0; font-weight: bold;">Dèmos : So silent... <a href="post.php">Talk.</a></p>
 <?php else: ?>
     <?php foreach ($posts as $post): ?>
         <div>
