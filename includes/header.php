@@ -40,12 +40,12 @@
                         <button type="submit">Join</button>
                     </form>
                 </td>
-                <td style="width: 25%; text-align: center; padding: 10px;">
-                    <form action="bios.php" method="get" style="display: inline;">
-                        <button type="submit">Bios</button>
-                    </form>
-                </td>
             <?php endif; ?>
+            <td style="width: 25%; text-align: center; padding: 10px;">
+                <form action="bios.php" method="get" style="display: inline;">
+                    <button type="submit">Bios</button>
+                </form>
+            </td>
         </tr>
     </table>
     <hr>
