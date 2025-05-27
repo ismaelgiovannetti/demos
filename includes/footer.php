@@ -1,7 +1,9 @@
 <br>
 <hr>
-<footer style="text-align: center; margin: 40px 0 20px 0;">
-    <a href="bios.php" style="display: inline-block;">Bios</a>
+<footer style="text-align: center;">
+    <form action="bios.php" method="get" style="display: inline;">
+        <button type="submit">Bios</button>
+    </form>
 </footer>
 </body>
 </html>
