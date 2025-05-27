@@ -6,12 +6,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     
     if (empty($username) || empty($password)) {
-        $_SESSION['message'] = 'Please fill in all fields';
+        $_SESSION['message'] = 'Dèmos : What is your name ?';
         redirect('register.php');
     }
     
     if (strlen($password) < 8) {
-        $_SESSION['message'] = 'Password must be at least 8 characters long';
+        $_SESSION['message'] = 'Dèmos : Password... Longer...';
         redirect('register.php');
     }
     
@@ -22,14 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $db->prepare('INSERT INTO users (username, password) VALUES (?, ?)');
         $stmt->execute([$username, $hashedPassword]);
         
-        $_SESSION['message'] = 'Registration successful! Please login.';
+        $_SESSION['message'] = 'Dèmos : Welcome to the People. Now connect.';
         redirect('login.php');
     } catch (PDOException $e) {
         if ($e->getCode() == 23000) { // Duplicate entry
-            $_SESSION['message'] = 'Username already exists';
+            $_SESSION['message'] = 'Dèmos : I already know you. Connect.';
         } else {
             error_log('Registration error: ' . $e->getMessage());
-            $_SESSION['message'] = 'Registration failed. Please try again.';
+            $_SESSION['message'] = 'Dèmos : Mhh...';
         }
         redirect('register.php');
     }
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <?php include 'includes/header.php'; ?>
 
-<h1>Register</h1>
+<h1>Join the People</h1>
 <form method="post" action="register.php">
     <table>
         <tr>
@@ -54,6 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </tr>
     </table>
 </form>
-<p>Already have an account? <a href="login.php">Login here</a></p>
+<p>I know you... <a href="login.php">Connect</a></p>
 
 <?php include 'includes/footer.php'; ?>
