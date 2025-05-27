@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center; padding-top: 15px;">
-                    <input type="submit" value="Register">
+                    <input type="submit" value="Join">
                 </td>
             </tr>
         </table>
