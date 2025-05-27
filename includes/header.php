@@ -30,14 +30,19 @@
                     </form>
                 </td>
             <?php else: ?>
-                <td style="width: 50%; text-align: center; padding: 10px;" colspan="2">
+                <td style="width: 25%; text-align: center; padding: 10px;" colspan="2">
                     <form action="login.php" method="get" style="display: inline;">
                         <button type="submit">Connect</button>
                     </form>
                 </td>
-                <td style="width: 50%; text-align: center; padding: 10px;" colspan="2">
+                <td style="width: 25%; text-align: center; padding: 10px;" colspan="2">
                     <form action="register.php" method="get" style="display: inline;">
                         <button type="submit">Join</button>
+                    </form>
+                </td>
+                <td style="width: 25%; text-align: center; padding: 10px;">
+                    <form action="bios.php" method="get" style="display: inline;">
+                        <button type="submit">Bios</button>
                     </form>
                 </td>
             <?php endif; ?>
