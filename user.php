@@ -188,6 +188,9 @@ function handleVote(postId, voteType, button) {
             if (btn.dataset.voteType === 'up') btn.textContent = '▲';
             if (btn.dataset.voteType === 'down') btn.textContent = '▼';
         });
+
+        // Refresh the page to update the social credit display
+        location.reload();
     });
     
     // Prevent form submission
