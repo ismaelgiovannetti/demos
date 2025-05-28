@@ -32,6 +32,9 @@ try {
     $db = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8mb4", $db_user, $db_pass);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    
+    // Set MySQL session timezone to UTC+2 (Europe/Paris)
+    $db->exec("SET time_zone = '+02:00'");
 } catch(PDOException $e) {
     die('Connection failed: ' . $e->getMessage());
 }

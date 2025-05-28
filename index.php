@@ -2,17 +2,15 @@
 try {
     require_once 'includes/config.php';
 
-    // Set timezone to UTC for database operations
-    date_default_timezone_set('UTC');
+    // Set default timezone to Europe/Paris (UTC+2)
+    date_default_timezone_set('Europe/Paris');
     
-    // Get selected date from URL or use today's date in UTC+2
-    $now = new DateTime('now', new DateTimeZone('Europe/Paris'));
+    // Get selected date from URL or use today's date in Europe/Paris
+    $now = new DateTime('now');
     $selectedDate = isset($_GET['date']) ? $_GET['date'] : $now->format('Y-m-d');
     
-    // Convert selected date to UTC for database query
-    $utcDate = (new DateTime($selectedDate, new DateTimeZone('Europe/Paris')))->setTime(0, 0, 0);
-    $utcDate->setTimezone(new DateTimeZone('UTC'));
-    $selectedDateForQuery = $utcDate->format('Y-m-d');
+    // Use the selected date directly since we've set the MySQL session timezone to UTC+2
+    $selectedDateForQuery = (new DateTime($selectedDate))->format('Y-m-d');
     
     // Build the query with date filter
     $query = '
@@ -174,12 +172,11 @@ document.getElementById('datePicker').addEventListener('change', function() {
     document.getElementById('dateForm').submit();
 });
 
-// Set default date to today in local timezone if no date is selected
+// Set default date to today in Europe/Paris timezone if no date is selected
 if (!new URLSearchParams(window.location.search).has('date')) {
+    // Get current date in local time (browser will handle timezone conversion)
     const now = new Date();
-    // Adjust for timezone offset to get the correct local date
-    const timezoneOffset = now.getTimezoneOffset() * 60000; // in milliseconds
-    const localDate = new Date(now - timezoneOffset).toISOString().split('T')[0];
+    const localDate = now.toISOString().split('T')[0];
     window.history.replaceState({}, '', `${window.location.pathname}?date=${localDate}`);
 }
 </script>
@@ -193,8 +190,7 @@ if (!new URLSearchParams(window.location.search).has('date')) {
                 <div>
                     <strong><a href="user.php?username=<?php echo urlencode($post['username']); ?>" style="color: inherit; text-decoration: none;"><?php echo htmlspecialchars($post['username']); ?></a></strong> - 
                     <?php 
-                    $date = new DateTime($post['created_at'], new DateTimeZone('UTC'));
-                    $date->setTimezone(new DateTimeZone('Europe/Paris')); // Paris is UTC+2 during DST
+                    $date = new DateTime($post['created_at']);
                     echo $date->format('g:i a'); 
                     ?>
                 </div>
