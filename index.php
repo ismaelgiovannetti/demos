@@ -2,8 +2,17 @@
 try {
     require_once 'includes/config.php';
 
-    // Get selected date from URL or use today's date
-    $selectedDate = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d');
+    // Set timezone to UTC for database operations
+    date_default_timezone_set('UTC');
+    
+    // Get selected date from URL or use today's date in UTC+2
+    $now = new DateTime('now', new DateTimeZone('Europe/Paris'));
+    $selectedDate = isset($_GET['date']) ? $_GET['date'] : $now->format('Y-m-d');
+    
+    // Convert selected date to UTC for database query
+    $utcDate = (new DateTime($selectedDate, new DateTimeZone('Europe/Paris')))->setTime(0, 0, 0);
+    $utcDate->setTimezone(new DateTimeZone('UTC'));
+    $selectedDateForQuery = $utcDate->format('Y-m-d');
     
     // Build the query with date filter
     $query = '
@@ -17,7 +26,7 @@ try {
     
     $stmt = $db->prepare($query);
     $currentUserId = is_logged_in() ? $_SESSION['user_id'] : 0;
-    $stmt->bindParam(':selected_date', $selectedDate);
+    $stmt->bindParam(':selected_date', $selectedDateForQuery);
     $stmt->bindParam(':current_user_id', $currentUserId, PDO::PARAM_INT);
 
     $stmt->execute();
@@ -165,10 +174,13 @@ document.getElementById('datePicker').addEventListener('change', function() {
     document.getElementById('dateForm').submit();
 });
 
-// Set default date to today if no date is selected
+// Set default date to today in local timezone if no date is selected
 if (!new URLSearchParams(window.location.search).has('date')) {
-    const today = new Date().toISOString().split('T')[0];
-    window.history.replaceState({}, '', `${window.location.pathname}?date=${today}`);
+    const now = new Date();
+    // Adjust for timezone offset to get the correct local date
+    const timezoneOffset = now.getTimezoneOffset() * 60000; // in milliseconds
+    const localDate = new Date(now - timezoneOffset).toISOString().split('T')[0];
+    window.history.replaceState({}, '', `${window.location.pathname}?date=${localDate}`);
 }
 </script>
 
