@@ -99,7 +99,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php endif; ?>
                 <?php endif; ?>
             </div>
-            <p style="margin: 10px 0 20px 0; font-size: 1.1em;"><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
+            <div class="post-content" style="margin: 10px 0 20px 0; font-size: 1.1em;"><?php echo nl2br(htmlspecialchars($post['content'])); ?></div>
             <hr>
         </div>
     <?php endforeach; ?>
@@ -199,6 +199,13 @@ function handleVote(postId, voteType, button) {
 </script>
 
 <style>
+.post-content {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
 .vote-button {
     background: none;
     border: 1px solid #ccc;
