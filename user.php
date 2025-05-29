@@ -64,8 +64,8 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div>
                     <strong><a href="user.php?username=<?php echo urlencode($post['username']); ?>" style="color: inherit; text-decoration: none;"><?php echo htmlspecialchars($post['username']); ?></a></strong> - 
                     <?php 
-                    $date = new DateTime($post['created_at'], new DateTimeZone('UTC'));
-                    $date->setTimezone(new DateTimeZone('Europe/Paris')); // Paris is UTC+2 during DST
+                    // Using the same approach as index.php - MySQL session timezone is already set to UTC+2
+                    $date = new DateTime($post['created_at']);
                     echo $date->format('M j, Y g:i a'); 
                     ?>
                 </div>
