@@ -24,10 +24,9 @@ $users = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
     <h1>Dèmos: The People</h1>
     
     <div style="margin: 20px 0; padding: 20px; background: #f5f5f5; border-radius: 5px;">
-        <h2>Statistics</h2>
-        <p>Total Users: <?php echo $totalUsers; ?></p>
-        <p>Active Users: <?php echo $activeUsers; ?></p>
-        <p>Inactive Users: <?php echo $totalUsers - $activeUsers; ?></p>
+        <p><?php echo $totalUsers; ?></p>
+        <p><?php echo $activeUsers; ?></p>
+        <p><?php echo $totalUsers - $activeUsers; ?></p>
     </div>
 </div>
 
